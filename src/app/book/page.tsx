@@ -164,11 +164,26 @@ export default function BookPage() {
 
   // Step indicator
   const steps = service?.hasCategories
-    ? ['Category', 'Problem', 'Confirm']
-    : ['Problem', 'Confirm']
-  const currentIdx = service?.hasCategories
-    ? { category: 0, problem: 1, confirm: 2, success: 3 }[step]
-    : { problem: 0, confirm: 1, success: 2 }[step]
+  ? ['Category', 'Problem', 'Confirm']
+  : ['Problem', 'Confirm']
+
+const currentIdxMapWithCategory: Record<Step, number> = {
+  category: 0,
+  problem: 1,
+  confirm: 2,
+  success: 3,
+}
+
+const currentIdxMapWithoutCategory: Record<Step, number> = {
+  category: 0,
+  problem: 0,
+  confirm: 1,
+  success: 2,
+}
+
+const currentIdx = service?.hasCategories
+  ? currentIdxMapWithCategory[step]
+  : currentIdxMapWithoutCategory[step]
 
   if (!service) return null
 
