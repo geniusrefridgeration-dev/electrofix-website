@@ -16,7 +16,6 @@ import { getLocalizedName } from '@/lib/getLocalizedName'
 
 type Step = 'category' | 'problem' | 'confirm' | 'success'
 
-
 // ── Address Edit Section ─────────────────────────────────────────────────────
 function AddressEditSection({ customer, t }: { customer: any; t: (k: any) => string }) {
   const { updateCustomer } = useStore()
