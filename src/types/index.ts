@@ -56,6 +56,7 @@ export interface Customer {
   address: Address
   location?: Location
   preferredLanguage: Language
+  profileImage?: string
 }
 
 export interface BookingService {
