@@ -158,17 +158,21 @@ export default function BookPage() {
   const handleBack = () => {
     if (step === 'problem' && service?.hasCategories) { setBookingCategory(null); setStep('category') }
     else if (step === 'problem') router.push('/home')
-    else if (step === 'confirm') { setBookingProblem(null); setStep(service?.hasCategories ? 'problem' : 'problem') }
+    else if (step === 'confirm') { setBookingProblem(null); setStep('problem') }
     else router.push('/home')
   }
 
   // Step indicator
+  // Single Record<Step, number> covers all keys — avoids TS narrowing issues
+  // when picking between two differently-shaped lookup objects.
+  const stepIndexMap: Record<Step, number> = service?.hasCategories
+    ? { category: 0, problem: 1, confirm: 2, success: 3 }
+    : { category: -1, problem: 0, confirm: 1, success: 2 }
+
   const steps = service?.hasCategories
     ? ['Category', 'Problem', 'Confirm']
     : ['Problem', 'Confirm']
-  const currentIdx = service?.hasCategories
-    ? { category: 0, problem: 1, confirm: 2, success: 3 }[step]
-    : { problem: 0, confirm: 1, success: 2 }[step]
+  const currentIdx = stepIndexMap[step]
 
   if (!service) return null
 
