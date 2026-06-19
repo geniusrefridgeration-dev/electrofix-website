@@ -4,6 +4,3 @@ node_modules/
 .env.production.local
 *.log
 .DS_Store
-tmpnodejs-cache
-.env
-.env.*

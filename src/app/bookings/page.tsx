@@ -9,7 +9,6 @@ import { format } from 'date-fns'
 import clsx from 'clsx'
 import Navbar from '@/components/layout/Navbar'
 import Providers from '@/components/Providers'
-import toast from 'react-hot-toast'
 
 const statusIcons = {
   pending:    { Icon: Clock,        color: 'text-amber-500',  bg: 'bg-amber-50 dark:bg-amber-900/20' },
@@ -50,42 +49,6 @@ export default function BookingsPage() {
     if (typeof labels === 'object') return (labels as any)[status] || status
     return status
   }
-
-  const handleCancel = async (bookingId: string) => {
-  try {
-    await api.patch(`/customer/bookings/${bookingId}/cancel`, {
-      reason: cancelReason,
-    })
-
-    toast.success('Booking cancelled successfully')
-    setCancelling(null)
-    setCancelReason('')
-    fetchBookings()
-  } catch (error: any) {
-    toast.error(error?.response?.data?.message || 'Failed to cancel booking')
-  }
-}
-
-const handleRate = async () => {
-  if (!ratingData) return
-
-  setSubmittingRating(true)
-
-  try {
-    await api.post(`/customer/bookings/${ratingData.bookingId}/rating`, {
-      rating: ratingData.stars,
-      review: ratingData.review,
-    })
-
-    toast.success('Thank you for your feedback')
-    setRatingData(null)
-    fetchBookings()
-  } catch (error: any) {
-    toast.error(error?.response?.data?.message || 'Failed to submit rating')
-  } finally {
-    setSubmittingRating(false)
-  }
-}
 
   return (
     <Providers>

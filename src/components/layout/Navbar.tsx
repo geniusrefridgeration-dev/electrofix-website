@@ -31,13 +31,8 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 bg-[var(--surface)]/90 backdrop-blur-md border-b border-[var(--border)]">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/home" className="flex items-center gap-2 flex-shrink-0">
-          <div className="w-8 h-8 rounded-lg bg-primary-500 flex items-center justify-center shadow-sm">
-            <Zap size={16} className="text-white" fill="white" />
-          </div>
-          <span className="font-display font-bold text-lg text-[var(--text)] tracking-tight">
-            Electro<span className="text-primary-500">Fix</span>
-          </span>
+        <Link href="/home" className="flex items-center flex-shrink-0">
+          <img src="/logo-navbar.png" alt="ElectroFix Genius Refrigeration" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav links (only when logged in) */}

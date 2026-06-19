@@ -48,9 +48,7 @@ export default function LoginPage() {
 
       <div className="w-full max-w-sm relative">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-14 h-14 rounded-2xl bg-primary-500 flex items-center justify-center shadow-lg mb-3 animate-bounce-sm">
-            <Zap size={26} className="text-white" fill="white" />
-          </div>
+          <img src="/logo-icon.png" alt="ElectroFix" className="w-16 h-16 rounded-2xl object-cover shadow-lg mb-3 animate-bounce-sm" />
           <h1 className="text-2xl font-display font-bold text-[var(--text)]">{t('loginTitle')}</h1>
           <p className="text-sm text-[var(--text-muted)] mt-1">{t('loginSubtitle')}</p>
         </div>

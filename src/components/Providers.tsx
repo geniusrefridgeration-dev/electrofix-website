@@ -61,7 +61,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         socket = io(url, { reconnectionAttempts: 5, transports: ['websocket', 'polling'] })
 
         socket.on('connect', () => {
-          socket.emit('join_customer', customer.id || customer.id)
+          socket.emit('join_customer', customer.id || customer._id)
         })
 
         socket.on('booking_status_update', (data: any) => {

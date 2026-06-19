@@ -53,7 +53,6 @@ export interface Customer {
   name: string
   mobile: string
   email?: string
-  profileImage?: string
   address: Address
   location?: Location
   preferredLanguage: Language

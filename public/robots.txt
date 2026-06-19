@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /bookings/
+Disallow: /profile/
+Disallow: /verify-otp/
+
+Sitemap: https://electrofix.in/sitemap.xml
+
+# Google Search Console verification
