@@ -44,6 +44,14 @@ export default function BookingsPage() {
     } finally { setLoading(false) }
   }
 
+  const handleCancel = async (bookingId: string) => {
+  console.log("Cancel booking:", bookingId)
+}
+
+const handleRate = async () => {
+  console.log("Rate booking")
+}
+
   const getStatusLabel = (status: Booking['status']) => {
     const labels = t('status' as any)
     if (typeof labels === 'object') return (labels as any)[status] || status
