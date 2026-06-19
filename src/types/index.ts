@@ -49,7 +49,8 @@ export interface Location {
 }
 
 export interface Customer {
-  id: string
+  _id: string
+  id?: string
   name: string
   mobile: string
   email?: string
