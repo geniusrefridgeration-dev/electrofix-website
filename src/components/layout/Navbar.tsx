@@ -87,8 +87,8 @@ export default function Navbar() {
             <Link href="/profile"
               className="flex items-center gap-2 ml-1 px-3 py-1.5 rounded-xl bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 text-sm font-semibold hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors">
               <div className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 bg-primary-200 dark:bg-primary-800 flex items-center justify-center">
-                {(customer as any).profileImage ? (
-                  <img src={(customer as any).profileImage} alt={customer.name} className="w-full h-full object-cover" />
+                {customer.profileImage ? (
+                  <img src={customer.profileImage} alt={customer.name} className="w-full h-full object-cover" />
                 ) : (
                   <span className="text-[10px] font-bold text-primary-600">{customer.name.charAt(0).toUpperCase()}</span>
                 )}

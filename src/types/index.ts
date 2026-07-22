@@ -50,12 +50,14 @@ export interface Location {
 
 export interface Customer {
   id: string
+  _id?: string
   name: string
   mobile: string
   email?: string
   address: Address
   location?: Location
   preferredLanguage: Language
+  profileImage?: string | null
 }
 
 export interface BookingService {
@@ -78,6 +80,9 @@ export interface Booking {
   distanceKm: number
   rejectionReason?: string
   totalAmount?: number | null
+  grandTotal?: number | null
+  paymentStatus?: 'unpaid' | 'paid' | 'partial' | null
+  invoiceNumber?: string | null
   scheduledDate?: string | null
   adminNotes?: string | null
   cancelledBy?: 'customer' | 'admin' | null
@@ -91,6 +96,13 @@ export interface Booking {
   dispatchedAt?: string
   completedAt?: string
   rejectedAt?: string
+  employeeSnapshot?: {
+    name: string
+    mobile: string
+    designation: string
+    profileImage?: string | null
+    employeeIdCode?: string | null
+  } | null
 }
 
 export interface HomeVisitSlab {

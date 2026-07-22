@@ -174,17 +174,17 @@ export default function BookingsPage() {
 
                         {/* Total amount */}
                         {/* Assigned Technician */}
-                        {(booking as any).employeeSnapshot && (
+                        {booking.employeeSnapshot && (
                           <div className="flex items-center gap-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-2.5 mt-1">
                             <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center overflow-hidden flex-shrink-0">
-                              {(booking as any).employeeSnapshot.profileImage
-                                ? <img src={(booking as any).employeeSnapshot.profileImage} alt="" className="w-full h-full object-cover" />
-                                : <span className="text-blue-600 font-bold text-xs">{(booking as any).employeeSnapshot.name?.charAt(0)}</span>}
+                              {booking.employeeSnapshot.profileImage
+                                ? <img src={booking.employeeSnapshot.profileImage} alt="" className="w-full h-full object-cover" />
+                                : <span className="text-blue-600 font-bold text-xs">{booking.employeeSnapshot.name?.charAt(0)}</span>}
                             </div>
                             <div>
                               <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">Your Technician</p>
-                              <p className="text-sm font-medium text-[var(--text)]">{(booking as any).employeeSnapshot.name} · {(booking as any).employeeSnapshot.designation}</p>
-                              <p className="text-xs text-[var(--text-muted)]">📞 {(booking as any).employeeSnapshot.mobile} · {(booking as any).employeeSnapshot.employeeIdCode}</p>
+                              <p className="text-sm font-medium text-[var(--text)]">{booking.employeeSnapshot.name} · {booking.employeeSnapshot.designation}</p>
+                              <p className="text-xs text-[var(--text-muted)]">📞 {booking.employeeSnapshot.mobile} · {booking.employeeSnapshot.employeeIdCode}</p>
                             </div>
                           </div>
                         )}
