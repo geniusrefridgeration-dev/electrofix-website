@@ -9,6 +9,7 @@ import { format } from 'date-fns'
 import clsx from 'clsx'
 import Navbar from '@/components/layout/Navbar'
 import Providers from '@/components/Providers'
+import toast from 'react-hot-toast'
 
 const statusIcons = {
   pending:    { Icon: Clock,        color: 'text-amber-500',  bg: 'bg-amber-50 dark:bg-amber-900/20' },
@@ -45,12 +46,36 @@ export default function BookingsPage() {
   }
 
   const handleCancel = async (bookingId: string) => {
-  console.log("Cancel booking:", bookingId)
-}
+    if (!cancelReason.trim()) { toast.error('Cancellation reason daalo'); return }
+    try {
+      await api.put(`/customer/bookings/${bookingId}/cancel`, { cancelReason })
+      toast.success('Booking cancelled')
+      setCancelling(null)
+      setCancelReason('')
+      fetchBookings()
+    } catch (e: any) {
+      toast.error(e.response?.data?.message || e.message || 'Cancel failed')
+    }
+  }
 
-const handleRate = async () => {
-  console.log("Rate booking")
-}
+  const handleRate = async () => {
+    if (!ratingData) return
+    if (!ratingData.stars) { toast.error('Star rating select karo'); return }
+    setSubmittingRating(true)
+    try {
+      await api.post(`/customer/bookings/${ratingData.bookingId}/rating`, {
+        rating: ratingData.stars,
+        review: ratingData.review,
+      })
+      toast.success('Rating submit ho gayi! ⭐')
+      setRatingData(null)
+      fetchBookings()
+    } catch (e: any) {
+      toast.error(e.response?.data?.message || e.message || 'Rating failed')
+    } finally {
+      setSubmittingRating(false)
+    }
+  }
 
   const getStatusLabel = (status: Booking['status']) => {
     const labels = t('status' as any)
@@ -148,20 +173,36 @@ const handleRate = async () => {
                         )}
 
                         {/* Total amount */}
-                        {(booking as any).totalAmount && (
+                        {/* Assigned Technician */}
+                        {(booking as any).employeeSnapshot && (
+                          <div className="flex items-center gap-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-2.5 mt-1">
+                            <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center overflow-hidden flex-shrink-0">
+                              {(booking as any).employeeSnapshot.profileImage
+                                ? <img src={(booking as any).employeeSnapshot.profileImage} alt="" className="w-full h-full object-cover" />
+                                : <span className="text-blue-600 font-bold text-xs">{(booking as any).employeeSnapshot.name?.charAt(0)}</span>}
+                            </div>
+                            <div>
+                              <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">Your Technician</p>
+                              <p className="text-sm font-medium text-[var(--text)]">{(booking as any).employeeSnapshot.name} · {(booking as any).employeeSnapshot.designation}</p>
+                              <p className="text-xs text-[var(--text-muted)]">📞 {(booking as any).employeeSnapshot.mobile} · {(booking as any).employeeSnapshot.employeeIdCode}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        {booking.totalAmount && (
                           <div className="flex justify-between text-xs font-bold border-t border-[var(--border)] pt-2 mt-1">
                             <span className="text-[var(--text)]">Total Amount</span>
-                            <span className="text-primary-500">₹{(booking as any).totalAmount}</span>
+                            <span className="text-primary-500">₹{booking.totalAmount}</span>
                           </div>
                         )}
 
                         {/* Scheduled date */}
-                        {(booking as any).scheduledDate && (
+                        {booking.scheduledDate && (
                           <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-2.5 mt-1">
                             <span className="text-blue-500 text-sm">📅</span>
                             <div>
                               <p className="text-xs font-semibold text-blue-700 dark:text-blue-300">Scheduled</p>
-                              <p className="text-xs text-blue-600">{new Date((booking as any).scheduledDate).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })}</p>
+                              <p className="text-xs text-blue-600">{new Date(booking.scheduledDate).toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })}</p>
                             </div>
                           </div>
                         )}
@@ -184,7 +225,7 @@ const handleRate = async () => {
                         )}
 
                         {/* Rate booking */}
-                        {booking.status === 'completed' && !(booking as any).rating && (
+                        {booking.status === 'completed' && !booking.rating && (
                           <div className="pt-1" onClick={e => e.stopPropagation()}>
                             {ratingData?.bookingId === booking._id ? (
                               <div className="space-y-2 mt-1">
@@ -210,9 +251,9 @@ const handleRate = async () => {
                         )}
 
                         {/* Show existing rating */}
-                        {booking.status === 'completed' && (booking as any).rating && (
+                        {booking.status === 'completed' && booking.rating && (
                           <div className="flex items-center gap-1 mt-1">
-                            {[1,2,3,4,5].map(s => <span key={s} className={`text-sm ${s <= (booking as any).rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>)}
+                            {[1,2,3,4,5].map(s => <span key={s} className={`text-sm ${s <= booking.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>)}
                             <span className="text-xs text-[var(--text-muted)] ml-1">Your rating</span>
                           </div>
                         )}

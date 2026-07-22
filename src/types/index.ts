@@ -49,15 +49,13 @@ export interface Location {
 }
 
 export interface Customer {
-  _id: string
-  id?: string
+  id: string
   name: string
   mobile: string
   email?: string
   address: Address
   location?: Location
   preferredLanguage: Language
-  profileImage?: string
 }
 
 export interface BookingService {
@@ -74,11 +72,20 @@ export interface BookingService {
 export interface Booking {
   _id: string
   bookingId: string
-  status: 'pending' | 'accepted' | 'rejected' | 'dispatched' | 'completed'
+  status: 'pending' | 'accepted' | 'rejected' | 'dispatched' | 'completed' | 'cancelled'
   service: BookingService
   homeVisitCharge: number
   distanceKm: number
   rejectionReason?: string
+  totalAmount?: number | null
+  scheduledDate?: string | null
+  adminNotes?: string | null
+  cancelledBy?: 'customer' | 'admin' | null
+  cancelReason?: string | null
+  cancelledAt?: string | null
+  rating?: number | null
+  review?: string | null
+  ratedAt?: string | null
   createdAt: string
   acceptedAt?: string
   dispatchedAt?: string

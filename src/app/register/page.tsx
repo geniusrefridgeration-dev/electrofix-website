@@ -76,7 +76,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          <img src="/logo-icon.png" alt="ElectroFix" className="w-16 h-16 rounded-2xl object-cover shadow-lg mb-3" />
+          <img src="/logo-icon.png" alt="ElectroFix" className="w-24 h-24 rounded-2xl object-cover shadow-lg mb-3" />
           <h1 className="text-2xl font-display font-bold text-[var(--text)]">{t('registerTitle')}</h1>
           <p className="text-sm text-[var(--text-muted)] mt-1">{t('registerSubtitle')}</p>
         </div>

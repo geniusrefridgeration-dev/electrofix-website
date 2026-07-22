@@ -32,7 +32,7 @@ export default function Navbar() {
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/home" className="flex items-center flex-shrink-0">
-          <img src="/logo-navbar.png" alt="ElectroFix Genius Refrigeration" className="h-10 w-auto" />
+          <div className="bg-white rounded-xl px-2 py-1 flex-shrink-0"><img src="/logo-navbar.png" alt="ElectroFix" className="h-12 w-auto" /></div>
         </Link>
 
         {/* Desktop Nav links (only when logged in) */}

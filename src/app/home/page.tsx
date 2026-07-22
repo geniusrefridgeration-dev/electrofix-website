@@ -301,7 +301,9 @@ export default function HomePage() {
         <footer className="bg-slate-900 text-white py-12">
           <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <img src="/logo-navbar.png" alt="ElectroFix" className="h-10 mb-4" />
+              <div className="inline-block bg-white rounded-xl px-3 py-2 mb-4">
+                <img src="/logo-navbar.png" alt="ElectroFix" className="h-12" />
+              </div>
               <p className="text-slate-400 text-sm leading-relaxed">
                 Raipur ka trusted home appliance repair service. AC, Refrigerator, Washing Machine, RO aur zyada.
               </p>

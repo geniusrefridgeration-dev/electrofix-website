@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://electrofix.ind.in'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://electrofix.in'
 const GA_ID    = process.env.NEXT_PUBLIC_GA_ID || ''
 const PHONE    = process.env.NEXT_PUBLIC_SHOP_PHONE || ''
 
