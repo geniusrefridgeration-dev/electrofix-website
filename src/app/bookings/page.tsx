@@ -253,7 +253,7 @@ export default function BookingsPage() {
                         {/* Show existing rating */}
                         {booking.status === 'completed' && booking.rating && (
                           <div className="flex items-center gap-1 mt-1">
-                            {[1,2,3,4,5].map(s => <span key={s} className={`text-sm ${s <= booking.rating ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>)}
+                            {[1,2,3,4,5].map(s => <span key={s} className={`text-sm ${s <= Number(booking.rating) ? 'text-yellow-400' : 'text-gray-300'}`}>★</span>)}
                             <span className="text-xs text-[var(--text-muted)] ml-1">Your rating</span>
                           </div>
                         )}

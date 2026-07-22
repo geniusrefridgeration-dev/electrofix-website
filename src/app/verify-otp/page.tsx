@@ -22,10 +22,6 @@ export default function VerifyOTPPage() {
   const [sentVia, setSentVia] = useState<'email' | 'sms' | null>(null)
   const [sentTo, setSentTo] = useState<string | null>(null)
 
-
-  console.log(otp, 'otp')
-  console.log(shownOtp, 'shownOtp')
-
   const inputs = useRef<(HTMLInputElement | null)[]>([])
 
   useEffect(() => {
