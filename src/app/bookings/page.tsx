@@ -9,6 +9,7 @@ import { format } from 'date-fns'
 import clsx from 'clsx'
 import Navbar from '@/components/layout/Navbar'
 import Providers from '@/components/Providers'
+import InvoiceModal from '@/components/ui/InvoiceModal'
 import toast from 'react-hot-toast'
 
 const statusIcons = {
@@ -31,6 +32,7 @@ export default function BookingsPage() {
   const [cancelReason, setCancelReason] = useState('')
   const [ratingData,   setRatingData]   = useState<{ bookingId: string; stars: number; review: string } | null>(null)
   const [submittingRating, setSubmittingRating] = useState(false)
+  const [invoiceBooking, setInvoiceBooking] = useState<Booking | null>(null)
 
   useEffect(() => {
     if (!customer) { router.replace('/login'); return }
@@ -250,6 +252,16 @@ export default function BookingsPage() {
                           </div>
                         )}
 
+                        {/* View Invoice button */}
+                        {booking.invoiceNumber && (
+                          <button
+                            onClick={e => { e.stopPropagation(); setInvoiceBooking(booking) }}
+                            className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700 hover:underline"
+                          >
+                            🧾 View Invoice {booking.invoiceNumber}
+                          </button>
+                        )}
+
                         {/* Show existing rating */}
                         {booking.status === 'completed' && booking.rating && (
                           <div className="flex items-center gap-1 mt-1">
@@ -266,6 +278,9 @@ export default function BookingsPage() {
           )}
         </main>
       </div>
+      {invoiceBooking && (
+        <InvoiceModal booking={invoiceBooking} onClose={() => setInvoiceBooking(null)} />
+      )}
     </Providers>
   )
 }

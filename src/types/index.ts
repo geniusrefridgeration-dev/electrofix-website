@@ -75,6 +75,11 @@ export interface Booking {
   _id: string
   bookingId: string
   status: 'pending' | 'accepted' | 'rejected' | 'dispatched' | 'completed' | 'cancelled'
+  customerSnapshot?: {
+    name: string
+    mobile: string
+    address?: { street?: string; city?: string; state?: string; pincode?: string; fullAddress?: string }
+  }
   service: BookingService
   homeVisitCharge: number
   distanceKm: number
